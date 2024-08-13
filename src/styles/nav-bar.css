@@ -1,0 +1,92 @@
+.navBar {
+    background-color: #2b3655 ;
+    overflow: hidden;
+    width: 40%;
+    margin: 20px auto;
+    border-radius: 20px;
+}
+
+.menuIcon {
+    display: none;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+    padding: 1rem;
+    transition: trasnform 0.3s ease;
+}
+
+.ulList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.listItems {
+    display: inline;
+    padding: 10px 14px;
+}
+
+.link {
+    display: block;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+}
+
+.link::before, .link::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transform: scaleX(0);
+    transition: all 0.6s ease;
+}
+
+.link::before {
+    top: 0;
+    left: 0;
+    transform-origin: left;
+}
+
+.link::after {
+    bottom: 0;
+    right: 0;
+    transform-origin: right;
+}
+
+.link:hover::before, .link:hover::after {
+    transform: scaleX(1);
+}
+
+
+
+/* Media queries para hacer la barra de navegación responsive */
+@media (max-width: 768px) {
+    .navBar {
+        width: 100%;
+    }
+
+    .menuIcon {
+        display: block;
+    }
+
+   .ulList {
+    flex-direction: column;
+    align-items: center;
+    display: none;
+    }
+    .ulList.open {
+        display: flex;
+    }
+    .listItems {
+        width: 100%;
+        text-align: center;
+    }
+
+}
