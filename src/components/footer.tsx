@@ -3,18 +3,30 @@ import { personalInfo } from "@/data/personal";
 import { socialLinks } from "@/data/socials";
 
 export function Footer() {
-  return (
-    <footer className="border-t border-zinc-800">
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 py-8 sm:flex-row sm:justify-between sm:px-6 lg:px-8">
-        <p className="text-sm text-zinc-500">
-          &copy; {new Date().getFullYear()} {personalInfo.name}
-        </p>
-        <div className="flex items-center gap-5">
-          {socialLinks.map((link) => (
-            <SocialLink key={link.platform} link={link} />
-          ))}
-        </div>
-      </div>
-    </footer>
-  );
+	return (
+		<footer className="border-t-2 border-border bg-background/90">
+			<div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:px-8">
+				<div className="grid gap-3 sm:grid-cols-[auto_1fr] sm:items-end sm:gap-6">
+					<div>
+						<p className="font-mono text-[0.65rem] uppercase tracking-[0.28em] text-muted-foreground">
+							End / Transmission
+						</p>
+						<p className="mt-2 font-display text-3xl uppercase leading-none tracking-[-0.05em] text-foreground">
+							{personalInfo.name}
+						</p>
+					</div>
+					<p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-muted-foreground">
+						&copy; {new Date().getFullYear()} Built for fast interfaces and
+						clear systems.
+					</p>
+				</div>
+
+				<div className="flex flex-wrap gap-3">
+					{socialLinks.map((link) => (
+						<SocialLink key={link.platform} link={link} />
+					))}
+				</div>
+			</div>
+		</footer>
+	);
 }

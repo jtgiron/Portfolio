@@ -1,15 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import "./shadcn-theme.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Font families — set by layout.tsx via next/font/local variables */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-oswald);
 
-  /* Color tokens — dark-mode-only portfolio */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -29,46 +28,96 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Radius */
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-xl: calc(var(--radius) * 1.25);
 }
 
-/* Single token set — dark-mode-only site, no light/dark switching */
 :root {
-  --background: #09090b;          /* zinc-950 */
-  --foreground: #fafafa;          /* zinc-50 */
-  --card: #18181b;                /* zinc-900 */
-  --card-foreground: #fafafa;
-  --popover: #18181b;
-  --popover-foreground: #fafafa;
-  --primary: #34d399;             /* emerald-400 */
-  --primary-foreground: #09090b;
-  --secondary: #27272a;           /* zinc-800 */
-  --secondary-foreground: #fafafa;
-  --muted: #27272a;               /* zinc-800 */
-  --muted-foreground: #a1a1aa;    /* zinc-400 */
-  --accent: #34d399;              /* emerald-400 */
-  --accent-foreground: #09090b;
-  --destructive: #ef4444;         /* red-500 */
-  --border: #27272a;              /* zinc-800 */
-  --input: #27272a;               /* zinc-800 */
-  --ring: #34d399;                /* emerald-400 */
-  --radius: 0.5rem;
+  --background: #0a0a0a;
+  --foreground: #f5f2e8;
+  --card: #111111;
+  --card-foreground: #f5f2e8;
+  --popover: #111111;
+  --popover-foreground: #f5f2e8;
+  --primary: #d7ff3f;
+  --primary-foreground: #0a0a0a;
+  --secondary: #1b1b1b;
+  --secondary-foreground: #f5f2e8;
+  --muted: #151515;
+  --muted-foreground: #9f9a8f;
+  --accent: #d7ff3f;
+  --accent-foreground: #0a0a0a;
+  --destructive: #ff5c39;
+  --border: #353535;
+  --input: #171717;
+  --ring: #d7ff3f;
+  --radius: 0.125rem;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 6.5rem;
+  background: var(--background);
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background:
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    radial-gradient(circle at top left, rgb(215 255 63 / 0.12), transparent 28%),
+    linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 100%);
+  background-size: 88px 88px, 88px 88px, auto, auto;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0 24px,
+      rgb(255 255 255 / 0.025) 24px 25px
+    ),
+    radial-gradient(circle at 20% 20%, rgb(215 255 63 / 0.08), transparent 24%),
+    radial-gradient(circle at 80% 30%, rgb(255 255 255 / 0.03), transparent 20%);
+  mix-blend-mode: screen;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
+  *::selection {
+    background: color-mix(in srgb, var(--primary) 82%, black 18%);
+    color: var(--primary-foreground);
+  }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  a,
+  button,
+  input,
+  textarea {
+    @apply transition-colors duration-150;
+  }
+
+  :where(a, button, input, textarea, [tabindex]):focus-visible {
+    scroll-margin-top: 8rem;
+    scroll-margin-bottom: 4rem;
+  }
+
+  section[id] {
+    position: relative;
+    scroll-margin-top: 7rem;
   }
 }
